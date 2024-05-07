@@ -1,0 +1,102 @@
+﻿
+@using EM.Domain;
+@using EM.Repository;
+@using EM.Domain.Enum
+@model EM.Domain.Aluno;
+
+ @{
+    bool isEdicao = ViewBag.IsEdicao ?? false;
+    string titulo = isEdicao ? "Editar Aluno" : "Cadastrar Aluno";
+
+
+
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<!--Inicio-->
+<div class=" Inicio">
+    <h1> Cadastrar Aluno </h1>
+</div>
+<div class="dev-form">
+    <form class="row g-3" asp-controller="Aluno" asp-action="CadastrarAluno" method="post">
+        <input type="hidden" asp-for="Matricula" />
+        <input type="hidden" id="isEdicao" name="isEdicao" value="@isEdicao" />
+        <div class="col-md-12  mb-3">
+            <label asp-for="Nome" for="exampleFormControlInput1" class="form-label">Nome</label>
+            <input asp-for="Nome" type="text" class="form-control" id="Nome" name="Nome" placeholder="Digite o nome ">
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="CPF" for="exampleFormControlInput1" class="form-label">CPF</label>
+            <input asp-for="CPF" type="text" class="form-control" id="CPF" name="CPF" placeholder="Digite o CPF">
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label for="Nascimento" class="form-label">Nascimento</label>
+            <input type="date" class="form-control" id="Nascimento" name="Nascimento" required
+                   placeholder="DD/MM/YYYY"
+                   value="@(Model.Nascimento.HasValue ? Model.Nascimento.Value.ToString("yyyy-MM-dd") : "")"
+                   max="@DateTime.Now.ToString("yyyy-MM-dd")"> <!-- Aqui adicionamos o atributo max -->
+            <span class="text-danger" data-valmsg-for="Nascimento" data-valmsg-replace="true"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="Cidade">Cidade</label>
+            <select id="inputEstado" name="Cidade.ID_Cidade" class="form-select" aria-label="Seleção de Cidade" required>
+                <option value="">Selecione</option>
+                @foreach (Cidade cidade in ViewBag.Cidades)
+                {
+                    if (Model.Cidade != null && Model.Cidade.ID_Cidade == cidade.ID_Cidade)
+                    {
+                        <option value="@cidade.ID_Cidade" selected>@cidade.NomeCidade - @cidade.UF</option>
+                    }
+                    else
+                    {
+                        <option value="@cidade.ID_Cidade">@cidade.NomeCidade - @cidade.UF</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+        </div>
+
+
+
+
+        <div class="form-group">
+            <label for="inputSexo" class="form-label">Sexo</label>
+            <select id="inputSexo" name="Sexo" class="form-select" aria-label="Seleção de Sexo" required>
+                <option value="" disabled selected>Selecione</option>
+                @{
+                    int? sexoValue = (int?)Model.Sexo;
+                    if (sexoValue == 1)
+                    {
+                        <option value="1" selected>Masculino</option>
+                        <option value="0">Feminino</option>
+                    }
+                    else if (sexoValue == 0)
+                    {
+                        <option value="1">Masculino</option>
+                        <option value="0" selected>Feminino</option>
+                    }
+                    else
+                    {
+                        <option value="1">Masculino</option>
+                        <option value="0">Feminino</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+        </div>
+
+
+
+        <div class="col-md-12 mb-3">
+            <button type="submit" class="btn btn-info">Salvar</button>
+            <a type="submit" class="btn btn-secondary" asp-controller="Aluno"asp-action="TabelaAluno">Voltar</a>
+        </div>
+
+    </form>
+
+</div>

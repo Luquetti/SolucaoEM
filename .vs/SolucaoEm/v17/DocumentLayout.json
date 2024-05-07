@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A34FA98D-1304-4FD8-A65A-3F07A92843ED}|EMDomain\\EM.Domain.csproj|c:\\work.luquetti\\poo\\solucaoem\\emdomain\\utilidades\\relatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A34FA98D-1304-4FD8-A65A-3F07A92843ED}|EMDomain\\EM.Domain.csproj|solutionrelative:emdomain\\utilidades\\relatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CE288FB-87CA-45C3-ACEB-CF4BD00984E4}|EM.Repository\\EM.Repository.csproj|c:\\work.luquetti\\poo\\solucaoem\\em.repository\\repositoriocidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0CE288FB-87CA-45C3-ACEB-CF4BD00984E4}|EM.Repository\\EM.Repository.csproj|solutionrelative:em.repository\\repositoriocidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F585A2B5-2DAA-498A-A977-7C41FDFC21F4}|SolucaoEm\\EM.Web.csproj|c:\\work.luquetti\\poo\\solucaoem\\solucaoem\\controllers\\cidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F585A2B5-2DAA-498A-A977-7C41FDFC21F4}|SolucaoEm\\EM.Web.csproj|solutionrelative:solucaoem\\controllers\\cidadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F585A2B5-2DAA-498A-A977-7C41FDFC21F4}|SolucaoEm\\EM.Web.csproj|c:\\work.luquetti\\poo\\solucaoem\\solucaoem\\views\\cidade\\cadastrarcidade.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F585A2B5-2DAA-498A-A977-7C41FDFC21F4}|SolucaoEm\\EM.Web.csproj|solutionrelative:solucaoem\\views\\cidade\\cadastrarcidade.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Relatorio.cs",
+              "DocumentMoniker": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\Utilidades\\Relatorio.cs",
+              "RelativeDocumentMoniker": "EMDomain\\Utilidades\\Relatorio.cs",
+              "ToolTip": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\Utilidades\\Relatorio.cs",
+              "RelativeToolTip": "EMDomain\\Utilidades\\Relatorio.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwBsAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T16:21:25.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CadastrarCidade.cshtml",
+              "DocumentMoniker": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\Views\\Cidade\\CadastrarCidade.cshtml",
+              "RelativeDocumentMoniker": "SolucaoEm\\Views\\Cidade\\CadastrarCidade.cshtml",
+              "ToolTip": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\Views\\Cidade\\CadastrarCidade.cshtml",
+              "RelativeToolTip": "SolucaoEm\\Views\\Cidade\\CadastrarCidade.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-07T14:51:44.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CidadeController.cs",
+              "DocumentMoniker": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\Controllers\\CidadeController.cs",
+              "RelativeDocumentMoniker": "SolucaoEm\\Controllers\\CidadeController.cs",
+              "ToolTip": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\Controllers\\CidadeController.cs",
+              "RelativeToolTip": "SolucaoEm\\Controllers\\CidadeController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwDIAAABZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T14:46:49.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RepositorioCidade.cs",
+              "DocumentMoniker": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\RepositorioCidade.cs",
+              "RelativeDocumentMoniker": "EM.Repository\\RepositorioCidade.cs",
+              "ToolTip": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\RepositorioCidade.cs",
+              "RelativeToolTip": "EM.Repository\\RepositorioCidade.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T14:46:55.652Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

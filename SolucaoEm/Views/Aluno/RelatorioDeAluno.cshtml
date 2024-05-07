@@ -1,0 +1,37 @@
+﻿@model EM.Domain.Aluno
+@using EM.Domain;
+
+
+@{
+	ViewData["Title"] = "Relatório Aluno";
+}
+ 
+
+<h2>@ViewData["Title"]</h2>
+
+<div class= "container">
+	<form asp-controller="Aluno" asp-action="RelatorioAluno" method="post">
+		<div class="form-group">
+			<label for="sexo">Sexo:</label>
+			<select id="sexo" name="Sexo" class="form-control">
+			<option value=" ">Selecione o Sexo</option>
+			<option value="0">Masculino</option>
+			<option value="1">Feminino</option>
+			</select>
+
+			
+		</div>
+	<div class="form-group">
+		<label for="Cidade">Cidade</label>
+		<select id="Cidade" name="ID_Cidade" id="ID_Cidade" class="form-control">
+			<option value="">Selecione a Cidade</option>
+			@foreach(Cidade cidade in ViewBag.Cidades  )
+			{
+				<option value="@cidade.ID_Cidade">@cidade.NomeCidade</option>
+							
+			}
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary">Gerar Relatorio</button>
+	</form>
+</div>

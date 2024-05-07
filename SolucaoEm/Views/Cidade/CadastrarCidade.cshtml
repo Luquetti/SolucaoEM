@@ -1,0 +1,33 @@
+﻿@using EM.Domain.Enum
+@using EM.Domain
+@model Cidade
+@{
+    bool isEdicao = ViewBag.IsEdicao ?? false;
+    string titulo = isEdicao ? "Edita Cidade" : "Cadastre Cidade";
+
+    ViewData["Title"] = titulo;
+}
+<div>
+  
+</div>
+<hr />
+<div class="container">
+    <form class="row" asp-controller="Cidade" asp-action="CadastreCidade" method="post">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+        <input type="hidden" asp-for="ID_Cidade" />
+        <input type="hidden" id="isEdicao" name="isEdicao" value="@isEdicao" />
+        <div class="col-6">
+            <label asp-for="NomeCidade" class="form-label"> <b> Nome </b> </label>
+            <input asp-for="NomeCidade" type="text" class="form-control" name="NomeCidade" id="NomeCidade" placeholder="Nome da cidade" />
+            <span asp-validation-for="NomeCidade"></span>
+        </div>
+        <div class="col-3">
+            <label asp-for="UF" class="form-label"> <b> UF </b> </label>
+            <input asp-for="UF" oninput="handleInput(event)" type="text" class="form-control" name="UF" id="UF" placeholder="Estado Da Cidade" maxlength="2" />
+        </div>
+        <div class="col-12">
+            <br />
+            <button type="submit" class="btn btn-outline-success">Salvar</button>
+        </div>
+    </form>
+</div>
