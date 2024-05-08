@@ -46,9 +46,9 @@ namespace EM.Web.Controllers
 
 				_repositorioCidade.Add(cidade);
 				}
-				return RedirectToAction("TabelaCidade", "Cidade");
+				return RedirectToAction("TabelaCidade", "Cidade");//sucesso no adicionar e ai ele vai para a pagina da tabela 
 			}
-			return View("CadastrarCidade", cidade);//view que ira ocorrer a açao,parametro passado
+			return View("CadastrarCidade", cidade);//view que ira ocorrer a açao,parametro passado, caso tenha um erro, ele permanece na view de cadastrar
 
 		}
 

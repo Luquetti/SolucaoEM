@@ -23,3 +23,4 @@ C:\Work.Luquetti\POO\SolucaoEm\EMDomain\obj\Debug\net8.0\EM.Domain.csproj.Up2Dat
 C:\Work.Luquetti\POO\SolucaoEm\EMDomain\bin\Debug\net8.0\FirebirdSql.Data.FirebirdClient.dll
 C:\Work.Luquetti\POO\SolucaoEm\EMDomain\bin\Debug\net8.0\BouncyCastle.Crypto.dll
 C:\Work.Luquetti\POO\SolucaoEm\EMDomain\bin\Debug\net8.0\itextsharp.dll
+C:\Work.Luquetti\POO\SolucaoEm\EMDomain\obj\Debug\net8.0\EM.Domain.sourcelink.json

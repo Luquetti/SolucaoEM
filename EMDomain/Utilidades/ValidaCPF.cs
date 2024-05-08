@@ -10,8 +10,8 @@ namespace EM.Domain.Utilidades
     {
         public static bool CPFValida(string cpf)
         {
-            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+            int[] multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
             string tempCpf;
             string digito;
             int soma;
@@ -31,7 +31,7 @@ namespace EM.Domain.Utilidades
             else
                 resto = 11 - resto;
             digito = resto.ToString();
-            tempCpf = tempCpf + digito;
+            tempCpf += digito;
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
@@ -40,7 +40,7 @@ namespace EM.Domain.Utilidades
                 resto = 0;
             else
                 resto = 11 - resto;
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             return cpf.EndsWith(digito);
         }
     }

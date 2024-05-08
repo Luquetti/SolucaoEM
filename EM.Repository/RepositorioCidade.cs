@@ -16,9 +16,9 @@ namespace EM.Repository
         {
             using DbConnection cn = BancoDeDados.GetConexao();
 			using DbCommand cmd = cn.CreateCommand();
-            cmd.CommandText = "INSERT INTO CIDADES(NOME,UF) VALUES(@NomeCidade,@UF)";
+            cmd.CommandText = "INSERT INTO CIDADES(NOME,UF) VALUES(@NomeCidade,@UF)";// o primeiro se refere a como esta na tabela , o segundo é como eu desejo repassar esses valores
 
-            cmd.Parameters.CreateParameter("@NomeCidade",cidade.NomeCidade);
+            cmd.Parameters.CreateParameter("@NomeCidade",cidade.NomeCidade);//o parametro q criei no sql acima,cidade é o valor passado no parametro da funçao, nomeCidade é uma propriedade da instancia  
             cmd.Parameters.CreateParameter("@UF", cidade.UF);
             
             cmd.ExecuteNonQuery();

@@ -12,7 +12,7 @@
 </div>
 <hr />
 <div class="container">
-    <form class="row" asp-controller="Cidade" asp-action="CadastreCidade" method="post">
+    <form class="row" asp-controller="Cidade" asp-action="CadastreCidade" method="post"> @*coloco o nome da classe controller, e qual o metodo Post*@
         <h1 class="text-center">@ViewData["Title"]</h1>
         <input type="hidden" asp-for="ID_Cidade" />
         <input type="hidden" id="isEdicao" name="isEdicao" value="@isEdicao" />

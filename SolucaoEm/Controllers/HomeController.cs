@@ -1,6 +1,4 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using SolucaoEm.Models;
 
 namespace SolucaoEm.Controllers
 {
@@ -11,6 +9,12 @@ namespace SolucaoEm.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is HomeController controller &&
+                   EqualityComparer<ILogger<HomeController>>.Default.Equals(_logger, controller._logger);
         }
 
         public IActionResult Index()//pagina principal

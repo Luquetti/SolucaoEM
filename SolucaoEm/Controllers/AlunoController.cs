@@ -1,28 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
 using EM.Domain;
-using EM.Domain.Enum;
-using EM.Repository;
-using System.Linq.Expressions;
 using EM.Domain.Interface;
-using SolucaoEm.Models;
-using System.Diagnostics;
 using EM.Domain.Utilidades;
+using Microsoft.AspNetCore.Mvc;
+using SolucaoEm.Models;
 
 
 namespace EM.Web.Controllers
 {
-    public class AlunoController : Controller
+    public class AlunoController(IRepositorioAluno<Aluno> repositorioAluno, IRepositorioCidade<Cidade> repositorioCidade, Relatorio geradorRelatorio) : Controller
     {
-        private readonly IRepositorioAluno<Aluno> repositorioAluno;
-        private readonly IRepositorioCidade<Cidade> repositorioCidade;
-        private readonly Relatorio geradorRelatorio;
-        public AlunoController(IRepositorioAluno<Aluno> repositorioAluno, IRepositorioCidade<Cidade> repositorioCidade, Relatorio geradorRelatorio)
-        {
-            this.repositorioAluno = repositorioAluno;
-            this.repositorioCidade = repositorioCidade;
-            this.geradorRelatorio = geradorRelatorio;
+        private readonly IRepositorioAluno<Aluno> repositorioAluno = repositorioAluno;
+        private readonly IRepositorioCidade<Cidade> repositorioCidade = repositorioCidade;
+        private readonly Relatorio geradorRelatorio = geradorRelatorio;
 
-        }
         public IActionResult TabelaAluno()
         {
             IEnumerable<Aluno> listaAluno = repositorioAluno.GetAll();
@@ -50,6 +41,7 @@ namespace EM.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 if (aluno.Matricula > 0)
                 {
                     repositorioAluno.Update(aluno);
@@ -93,7 +85,7 @@ namespace EM.Web.Controllers
             }
             else
             {
-                alunos = new List<Aluno>();
+                alunos = [];
             }
 
             return View("TabelaAluno", alunos);
@@ -126,13 +118,13 @@ namespace EM.Web.Controllers
 				}
 
                 // Ger// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-                byte[] pdfPath = geradorRelatorio.GerarPDF(alunos);
+                byte[] pdfPath = geradorRelatorio.GerarPDF(alunos,ID_Cidade,sexo);
                 // Retorna o FileStream como um FileStreamResult.
                 return File(pdfPath, "application/pdf", "RelatorioAlunos.pdf");
 			}
 			catch (Exception ex)
 			{
-				// Em um ambiente real, seria melhor logar esse erro.
+				
 				return BadRequest("Erro ao gerar relatório: " + ex.Message);
 			}
 
@@ -144,7 +136,7 @@ namespace EM.Web.Controllers
 			List<Aluno> alunos = repositorioAluno.GetAll().ToList();
 
 			// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-			byte [] pdfPath = geradorRelatorio.GerarPDF(alunos);
+			byte [] pdfPath = geradorRelatorio.GerarPDF(alunos,null,null);
 
 
 
