@@ -46,7 +46,7 @@ namespace EM.Domain.Utilidades
                  
                 //Titulo
                 Font titleFont= FontFactory.GetFont("Arial",24,Font.BOLD);
-                Paragraph title = new("Relatorio de Alunos", titleFont)
+                Paragraph title = new("Relatório de Alunos", titleFont)
                 {
                     Alignment = Element.ALIGN_LEFT
                 };
@@ -91,9 +91,9 @@ namespace EM.Domain.Utilidades
 
                 document.Add(linebreak);
                 // PARÂMETROS DA TABELA
-                PdfPTable table = new([7, 10, 4, 5, 5, 6, 2])
+                PdfPTable table = new([4, 10, 3, 7, 5, 8, 2])
                 {
-                    WidthPercentage = 110
+                    WidthPercentage = 100
                 };
 
                 //cabeçalho da tabela
