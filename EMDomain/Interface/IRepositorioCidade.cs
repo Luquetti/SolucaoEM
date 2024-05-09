@@ -6,7 +6,7 @@ namespace EM.Domain.Interface
     {
         void Add(T obj);
         void Update(T obj);
-        void Remover(T obj);
+        void Remove(T obj);
         IEnumerable<T> GetAll();
         IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
     }

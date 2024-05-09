@@ -6,8 +6,8 @@ namespace EM.Web.Controllers
 {
     public class CidadeController : Controller
 	{
-		private readonly RepositorioCidade _repositorioCidade = new RepositorioCidade();
-		public IActionResult EditarCidade() 
+		private readonly RepositorioCidade _repositorioCidade = new();
+		public IActionResult EditeCidade() 
         {
 
         return View();
@@ -15,7 +15,7 @@ namespace EM.Web.Controllers
         }
 
 		
-        public IActionResult CadastrarCidade(int? id )
+        public IActionResult CadastreCidade(int? id )
         {
 			{
 				if (id != null)
@@ -48,7 +48,7 @@ namespace EM.Web.Controllers
 				}
 				return RedirectToAction("TabelaCidade", "Cidade");//sucesso no adicionar e ai ele vai para a pagina da tabela 
 			}
-			return View("CadastrarCidade", cidade);//view que ira ocorrer a açao,parametro passado, caso tenha um erro, ele permanece na view de cadastrar
+			return View("CadastreCidade", cidade);//view que ira ocorrer a açao,parametro passado, caso tenha um erro, ele permanece na view de cadastrar
 
 		}
 

@@ -165,7 +165,7 @@ namespace EM.Repository
 		}
 
 
-		public void Remover(Aluno aluno)
+		public void Remove(Aluno aluno)
 		{
 			using DbConnection cn = BancoDeDados.GetConexao();
 			using DbCommand cmd = cn.CreateCommand();

@@ -19,7 +19,7 @@ namespace EM.Web.Controllers
             IEnumerable<Aluno> listaAluno = repositorioAluno.GetAll();
             return View(listaAluno);
         }
-        public IActionResult CadastrarAluno(int? matricula)
+        public IActionResult CadastreAluno(int? matricula)
         {
             ViewBag.Cidades = repositorioCidade.GetAll().ToList();
             if (matricula != null)
@@ -37,7 +37,7 @@ namespace EM.Web.Controllers
         }
 
         [HttpPost]//processa os dados enviados pelo usuario
-        public IActionResult CadastrarAluno(Aluno aluno)
+        public IActionResult CadastreAluno(Aluno aluno)
         {
             if (ModelState.IsValid)
             {
@@ -59,14 +59,14 @@ namespace EM.Web.Controllers
 
 
         }
-        public IActionResult EditarAluno()
+        public IActionResult EditeAluno()
         {
             return View();
         }
         [HttpPost]
         public IActionResult Delete(Aluno aluno)
         {
-            repositorioAluno.Remover(aluno);
+            repositorioAluno.Remove(aluno);
             return RedirectToAction("TabelaAluno");
         }
         [HttpPost]
@@ -118,7 +118,7 @@ namespace EM.Web.Controllers
 				}
 
                 // Ger// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-                byte[] pdfPath = geradorRelatorio.GerarPDF(alunos,ID_Cidade,sexo);
+                byte[] pdfPath = Relatorio.GerarPDF(alunos,ID_Cidade,sexo);
                 // Retorna o FileStream como um FileStreamResult.
                 return File(pdfPath, "application/pdf", "RelatorioAlunos.pdf");
 			}
@@ -136,7 +136,7 @@ namespace EM.Web.Controllers
 			List<Aluno> alunos = repositorioAluno.GetAll().ToList();
 
 			// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-			byte [] pdfPath = geradorRelatorio.GerarPDF(alunos,null,null);
+			byte [] pdfPath = Relatorio.GerarPDF(alunos,null,null);
 
 
 

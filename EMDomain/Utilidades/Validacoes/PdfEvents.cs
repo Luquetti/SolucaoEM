@@ -15,14 +15,16 @@ namespace EM.Domain.Utilidades.Validacoes
         {
             base.OnStartPage(writer, document);
 
-            PdfPTable header = new PdfPTable(1);
-            header.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin;
-            header.LockedWidth = true;
+            PdfPTable header = new(1)
+            {
+                TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin,
+                LockedWidth = true
+            };
 
             Image logo = Image.GetInstance("C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\unnamed.png");
             logo.ScaleToFit(200, 100);  // Make sure the height here is controlled
 
-            PdfPCell logoCell = new PdfPCell(logo)
+            PdfPCell logoCell = new(logo)
             {
                 Border = Rectangle.NO_BORDER,
 
@@ -55,15 +57,6 @@ namespace EM.Domain.Utilidades.Validacoes
             canvas.AddImage(backgroundImage);
 
             document.Add(header);
-        }
-
-        private PdfPCell CreateHeaderCell(string text)
-        {
-            return new PdfPCell(new Phrase(text))
-            {
-                HorizontalAlignment = Element.ALIGN_CENTER,
-                VerticalAlignment = Element.ALIGN_MIDDLE
-            };
         }
     }
 }

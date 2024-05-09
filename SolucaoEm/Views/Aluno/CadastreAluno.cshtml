@@ -6,7 +6,7 @@
 
  @{
     bool isEdicao = ViewBag.IsEdicao ?? false;
-    string titulo = isEdicao ? "Editar Aluno" : "Cadastrar Aluno";
+    string titulo = isEdicao ? "Edite Aluno" : "Cadastre Aluno";
 
 
 
@@ -18,7 +18,7 @@
     <h1> Cadastrar Aluno </h1>
 </div>
 <div class="dev-form">
-    <form class="row g-3" asp-controller="Aluno" asp-action="CadastrarAluno" method="post">
+    <form class="row g-3" asp-controller="Aluno" asp-action="CadastreAluno" method="post">
         <input type="hidden" asp-for="Matricula" />
         <input type="hidden" id="isEdicao" name="isEdicao" value="@isEdicao" />
         <div class="col-md-12  mb-3">

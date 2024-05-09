@@ -16,7 +16,7 @@
 		<h2>Tabela de Alunos</h2>
 	</div>
 	<div class=" col text-end">
-		<a type="button" class="btn botao-btn-verde" asp-controller="Aluno" asp-action="CadastrarAluno">Adicionar Aluno</a>
+		<a type="button" class="btn botao-btn-verde" asp-controller="Aluno" asp-action="CadastreAluno">Adicionar Aluno</a>
 
 
 	<a type="button" class="btn botao-btn-verde" asp-controller="Aluno" asp-action="RelatorioAluno" target="_blank">Relatorio Aluno</a>
@@ -87,7 +87,7 @@
 	<td>@aluno.Cidade.NomeCidade</td>
 	<td>@aluno.Cidade.UF</td>
 	<td>
-	<a type="button" class="btn btn-primary"href="@Url.Action("CadastrarAluno","Aluno",new {matricula=aluno.Matricula})"> Editar <img src=~/imagens/pencil-svgrepo-com.svg class="icon-small"></a>
+	<a type="button" class="btn btn-primary"href="@Url.Action("CadastreAluno","Aluno",new {matricula=aluno.Matricula})"> Editar <img src=~/imagens/pencil-svgrepo-com.svg class="icon-small"></a>
 	<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalExclui-@aluno.Matricula">Excluir <img src=~/imagens/trash-svgrepo-com.svg class="icon-small"></button>
 		
 

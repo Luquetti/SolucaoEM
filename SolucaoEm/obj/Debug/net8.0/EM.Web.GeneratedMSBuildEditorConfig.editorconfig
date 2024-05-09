@@ -18,8 +18,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Work.Luquetti\POO\SolucaoEm\SolucaoEm
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Work.Luquetti/POO/SolucaoEm/SolucaoEm/Views/Aluno/CadastrarAluno.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cQ2FkYXN0cmFyQWx1bm8uY3NodG1s
+[C:/Work.Luquetti/POO/SolucaoEm/SolucaoEm/Views/Aluno/CadastreAluno.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cQ2FkYXN0cmVBbHVuby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Work.Luquetti/POO/SolucaoEm/SolucaoEm/Views/Aluno/RelatorioDeAluno.cshtml]
@@ -30,8 +30,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bm9cVGFiZWxhQWx1bm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Work.Luquetti/POO/SolucaoEm/SolucaoEm/Views/Cidade/CadastrarCidade.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2lkYWRlXENhZGFzdHJhckNpZGFkZS5jc2h0bWw=
+[C:/Work.Luquetti/POO/SolucaoEm/SolucaoEm/Views/Cidade/CadastreCidade.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2lkYWRlXENhZGFzdHJlQ2lkYWRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Work.Luquetti/POO/SolucaoEm/SolucaoEm/Views/Cidade/TabelaCidade.cshtml]

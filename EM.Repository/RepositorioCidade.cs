@@ -52,7 +52,7 @@ namespace EM.Repository
         }
 
 
-        public  void Remover(Cidade cidade)
+        public  void Remove(Cidade cidade)
         {
             throw new NotImplementedException();
         }
