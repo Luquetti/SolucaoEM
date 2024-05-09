@@ -1,61 +1,56 @@
-﻿using iTextSharp.text;
+﻿using EM.Domain.Utilidades.Validacoes;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 
 namespace EM.Domain.Utilidades
 {
+
+
+
     public class Relatorio
-    {
-        public byte[] GerarPDF(List<Aluno> alunos,int? Id_Cidade,int?Sexo)
+    { 
+        public byte[] GerarPDF(List<Aluno> alunos, int? Id_Cidade, int? Sexo)
         {
 
             using (MemoryStream m = new())
             {
 
+                Document document = new Document(PageSize.A4, 25, 25, 25, 30); 
+                PdfWriter writer = PdfWriter.GetInstance(document, m);
 
-                Document document = new(PageSize.A4, 25, 25, 30, 30);
-               PdfWriter writer= PdfWriter.GetInstance(document, m);
-                document.Open();
-               
+              
+                PdfEvents events = new PdfEvents();
+                writer.PageEvent = events;
+
+
                 string backgroundPath = "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\fundo2.png";
-                PdfGState gs = new()
-                {
-                    FillOpacity = 0.3f
-                };
-                writer.DirectContentUnder.SetGState(gs);
-                Image backgroundImage = Image.GetInstance(backgroundPath);
-                backgroundImage.SetAbsolutePosition(0, 0);
-                backgroundImage.ScaleToFit(document.PageSize.Width, document.PageSize.Height);
 
-                // Adiciona a imagem de fundo
-                PdfContentByte canvas = writer.DirectContentUnder;
-                canvas.AddImage(backgroundImage);
+                document.Open();
 
-                PdfPTable layoutTable = new([3, 6])
+                // Title table, set this up with reduced or negative padding
+                PdfPTable layoutTable = new PdfPTable(1);
+                layoutTable.WidthPercentage = 100;  // Full width
+
+                Font titleFont = FontFactory.GetFont("Arial", 24, Font.BOLD);
+                Paragraph title = new Paragraph("Relatório de Alunos", titleFont)
                 {
-                    WidthPercentage = 100
+                    Alignment = Element.ALIGN_CENTER
                 };
-                // Logo
-                string logopath = "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\unnamed.png";
-                Image logo= Image.GetInstance(logopath);
-                logo.ScaleToFit(100, 100);
-                PdfPCell logoCell = new(logo)
+
+                PdfPCell titleCell = new PdfPCell(new Phrase(title))
                 {
-                    Border = Rectangle.NO_BORDER
+                    Border = Rectangle.NO_BORDER,
+                    HorizontalAlignment = Element.ALIGN_CENTER,
+                    VerticalAlignment = Element.ALIGN_TOP,
+                    PaddingTop = -40,  // Negative padding to move upwards, adjust as needed
+                    PaddingBottom = 0
                 };
-                layoutTable.AddCell(logoCell);
-                 
-                //Titulo
-                Font titleFont= FontFactory.GetFont("Arial",24,Font.BOLD);
-                Paragraph title = new("Relatório de Alunos", titleFont)
-                {
-                    Alignment = Element.ALIGN_LEFT
-                };
-                PdfPCell titleCell=new();
-                titleCell.AddElement(title);
-                titleCell.Border=Rectangle.NO_BORDER;
                 layoutTable.AddCell(titleCell);
 
+                // Add the title table to the document; it should appear over the logo
                 document.Add(layoutTable);
+
+
                 document.Add(new Paragraph());
                 Chunk linebreak = new(new iTextSharp.text.pdf.draw.LineSeparator(1f, 112f, BaseColor.BLACK, Element.ALIGN_CENTER, -1));
 
@@ -83,109 +78,130 @@ namespace EM.Domain.Utilidades
                     }
                 }
 
-
-
-
-
-
-
                 document.Add(linebreak);
-                // PARÂMETROS DA TABELA
-                PdfPTable table = new([4, 10, 3, 7, 5, 8, 2])
+
+                PdfPTable table = new([5, 10, 4, 7, 6, 8, 2])
                 {
-                    WidthPercentage = 100
+                    WidthPercentage = 103
                 };
 
-                //cabeçalho da tabela
-                PdfPCell cell = new PdfPCell(new Phrase("Matrícula"))
+
+                table.DefaultCell.FixedHeight = 30;
+                table.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                table.DefaultCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+
+
+                PdfPCell CreateHeaderCell(string text) => new PdfPCell(new Phrase(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE)))
                 {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
+                    BackgroundColor = new BaseColor(0, 100, 0)
                 };
-                cell.HorizontalAlignment= Element.ALIGN_CENTER;
-                table.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase("Nome"))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
-                };
-                table.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase("Sexo"))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
-                };
-                table.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("CPF"))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
-                };
-                table.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Idade"))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
-                };
-                table.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Cidade"))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
-                };
-                table.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("UF"))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE
-                };
-                table.AddCell(cell);
+                table.AddCell(CreateHeaderCell("Matrícula"));
+                table.AddCell(CreateHeaderCell("Nome"));
+                table.AddCell(CreateHeaderCell("Sexo"));
+                table.AddCell(CreateHeaderCell("CPF"));
+                table.AddCell(CreateHeaderCell("Idade"));
+                table.AddCell(CreateHeaderCell("Cidade"));
+                table.AddCell(CreateHeaderCell("UF"));
 
 
 
 
 
+
+
+
+                //cabeçalho da tabela;RODRIGO
+                //PdfPCell cell = new PdfPCell(new Phrase("Matrícula"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                //table.AddCell(cell);
+
+                //cell = new PdfPCell(new Phrase("Nome"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //table.AddCell(cell);
+
+                //cell = new PdfPCell(new Phrase("Sexo"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //table.AddCell(cell);
+
+                //cell = new PdfPCell(new Phrase("CPF"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //table.AddCell(cell);
+
+                //cell = new PdfPCell(new Phrase("Idade"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //table.AddCell(cell);
+
+                //cell = new PdfPCell(new Phrase("Cidade"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //table.AddCell(cell);
+
+                //cell = new PdfPCell(new Phrase("UF"))
+                //{
+                //    HorizontalAlignment = Element.ALIGN_CENTER,
+                //    VerticalAlignment = Element.ALIGN_MIDDLE
+                //};
+                //table.AddCell(cell);
+                table.HeaderRows = 1;
 
                 foreach (Aluno aluno in alunos)
                 {
+
                     table.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
                     table.AddCell(aluno.Matricula?.ToString() ?? "");
-                    
+
+
+
                     table.AddCell(aluno.Nome ?? "");
                     string sexoAbreviado = (aluno.Sexo == Enum.Sexo.masculino ? "M" : "F");
                     table.AddCell(sexoAbreviado.ToString());
                     table.AddCell(aluno.CPF);
-					table.AddCell(CalcularIdade(aluno.Nascimento).ToString());
-					table.AddCell(aluno.Cidade.NomeCidade);
-					table.AddCell(aluno.Cidade.UF);
-				}
+                    table.AddCell(CalcularIdade(aluno.Nascimento).ToString());
+                    table.AddCell(aluno.Cidade.NomeCidade);
+                    table.AddCell(aluno.Cidade.UF);
+
+                }
 
                 document.Add(table);
                 document.Close();
 
-				return m.ToArray();
-			}
+                return m.ToArray();
+            }
         }
-       
+
         private static string CalcularIdade(DateTime? dataNascimento)
         {
             if (!dataNascimento.HasValue)
             {
-                return "0"; 
+                return "0";
             }
 
             DateTime hoje = DateTime.Now;
-            int anos=hoje.Year - dataNascimento.Value.Year;
-            int meses= hoje.Month - dataNascimento.Value.Month;
+            int anos = hoje.Year - dataNascimento.Value.Year;
+            int meses = hoje.Month - dataNascimento.Value.Month;
             int dias = hoje.Day - dataNascimento.Value.Day;
 
-            if(dias<0)
+            if (dias < 0)
             {
                 meses--;
                 dias += DateTime.DaysInMonth(hoje.Year, hoje.Month);
