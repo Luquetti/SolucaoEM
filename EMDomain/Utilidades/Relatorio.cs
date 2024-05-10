@@ -9,13 +9,19 @@ namespace EM.Domain.Utilidades
 
     public class Relatorio
     { 
-        public static byte[] GerarPDF(List<Aluno> alunos, string? nameCidade , int? Sexo,bool linhaAlternada)
+        public static byte[] GerarPDF(List<Aluno> alunos, string? nameCidade , int? Sexo,bool linhaAlternada, bool paisagem )
         {
-
+           
             using MemoryStream m = new();
+            Document document;
+            if (paisagem)
+            { document =new Document(PageSize.A4.Rotate(), 25, 25, 25, 30); }
 
 
-            Document document = new(PageSize.A4, 25, 25, 25, 30);
+            else
+            {
+                document=new Document(PageSize.A4,25,25,25,30); 
+            }
             PdfWriter writer = PdfWriter.GetInstance(document, m);
 
 
@@ -23,12 +29,12 @@ namespace EM.Domain.Utilidades
             writer.PageEvent = events;
 
 
-            string backgroundPath = "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\fundo2.png";
+           
 
             document.Open();
             //TENATDNO COLOCAR LINHA ZEBRADA:
-            BaseColor colorEven = new BaseColor(233, 233, 233); // Cor clara para linhas pares
-            BaseColor colorOdd = new BaseColor(255, 255, 255);
+            BaseColor colorEven = new BaseColor(0, 0, 0, 40); // Cor clara para linhas pares
+            BaseColor colorOdd = null;
 
             // Title table, set this up with reduced or negative padding
             PdfPTable layoutTable = new(1)

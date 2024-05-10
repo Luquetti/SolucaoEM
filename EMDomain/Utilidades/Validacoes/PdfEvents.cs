@@ -5,8 +5,8 @@ namespace EM.Domain.Utilidades.Validacoes
 {
     public class PdfEvents : PdfPageEventHelper
     {
-        private string backgroundImagePath;
-        private  string logopath;
+        private string backgroundImagePath= "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\fundo2.png";
+		private  string logopath = "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\unnamed.png";
 
         // Construtor para inicializar os caminhos das imagens
 
@@ -21,7 +21,7 @@ namespace EM.Domain.Utilidades.Validacoes
                 LockedWidth = true
             };
 
-            Image logo = Image.GetInstance("C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\unnamed.png");
+            Image logo = Image.GetInstance(logopath);
             logo.ScaleToFit(200, 100);  // Make sure the height here is controlled
 
             PdfPCell logoCell = new(logo)
@@ -43,20 +43,24 @@ namespace EM.Domain.Utilidades.Validacoes
             };
             header.AddCell(emptyCell);
 
-            PdfGState gs = new()
-            {
-                FillOpacity = 0.3f
-            };
-            writer.DirectContentUnder.SetGState(gs);
-            Image backgroundImage = Image.GetInstance("C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\fundo2.png");
-            backgroundImage.SetAbsolutePosition(0, 120);
-            backgroundImage.ScaleToFit(document.PageSize.Width, document.PageSize.Height);
+			PdfGState gs = new()
+			{
+				FillOpacity = 0.6f
+			};
+			writer.DirectContentUnder.SetGState(gs);
+			Image backgroundImage = Image.GetInstance(backgroundImagePath);
+			// Dimensiona a imagem para caber na página
+			backgroundImage.ScaleToFit(document.PageSize.Width, document.PageSize.Height);
+			backgroundImage.ScalePercent(80);
+			// Calcula a posição relativa para centralizar a imagem
+			float xPosition = (document.PageSize.Width - backgroundImage.ScaledWidth) / 2;
+			float yPosition = (document.PageSize.Height - backgroundImage.ScaledHeight) / 2 - 50;
+			backgroundImage.SetAbsolutePosition(xPosition, yPosition);
+			// Adiciona a imagem de fundo
+			PdfContentByte canvas = writer.DirectContentUnder;
+			canvas.AddImage(backgroundImage);
 
-            // Adiciona a imagem de fundo
-            PdfContentByte canvas = writer.DirectContentUnder;
-            canvas.AddImage(backgroundImage);
-
-            document.Add(header);
+			document.Add(header);
         }
     }
 }

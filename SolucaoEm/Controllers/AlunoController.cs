@@ -98,7 +98,7 @@ namespace EM.Web.Controllers
             }
 
          [HttpPost]
-           public IActionResult RelatorioAluno(int? sexo=null, int? ID_Cidade=null,bool linhaAlternada=false )
+           public IActionResult RelatorioAluno(int? sexo=null, int? ID_Cidade=null,bool linhaAlternada=false,bool paisagem=false)
             
            {
 			try
@@ -119,7 +119,7 @@ namespace EM.Web.Controllers
 				}
 
                 // Ger// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-                byte[] pdfContent = Relatorio.GerarPDF(alunos,nameCidade,sexo,linhaAlternada);
+                byte[] pdfContent = Relatorio.GerarPDF(alunos,nameCidade,sexo,linhaAlternada,paisagem);
                
                 return File(pdfContent, "application/pdf",null,false);
 			}
@@ -137,7 +137,7 @@ namespace EM.Web.Controllers
 			List<Aluno> alunos = repositorioAluno.GetAll().ToList();
 
 			// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-			byte [] pdfContent = Relatorio.GerarPDF(alunos,null,null,false);
+			byte [] pdfContent = Relatorio.GerarPDF(alunos,null,null,false,false);
 
 
 
