@@ -6,55 +6,28 @@ using EM.Domain.Utilidades;
 
 namespace EM.Domain
 {
-	public class Aluno:IEntidade
+    public class Aluno : IEntidade
     {
 
         public int? Matricula { get; set; }
 
-       [Required(ErrorMessage = "preencha este campo")]
+        [Required(ErrorMessage = "preencha este campo")]
         [StringLength(100, ErrorMessage = "Nome Deve ter no máximo 100 caracteres!")]
         [MinLength(3, ErrorMessage = "Nome Deve ter no mínimo 3 caracteres!")]
         public string? Nome { get; set; }
         [CPFValidation]
         public string? CPF { get; set; }
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
-       [DataType(DataType.Date)]
-       [Display(Name = "Data de Nascimento")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data de Nascimento")]
         public DateTime? Nascimento { get; set; }
-        [Required (ErrorMessage ="O campo sexo é obrigatório.")]
+        [Required(ErrorMessage = "O campo sexo é obrigatório.")]
         public Sexo? Sexo { get; set; }
-        [Required(ErrorMessage ="O campo Cidade é obrigatório.")]
+        [Required(ErrorMessage = "O campo Cidade é obrigatório.")]
         public Cidade? Cidade { get; set; }
 
-        public Aluno()
-        {
+            
 
-        }
-        public Aluno(int matricula, string nome, string cpf, DateTime nascimento,Sexo sexo , Cidade cidade)
-        {
-
-
-
-            Matricula = matricula;
-            Nome = nome;
-            CPF = cpf;
-            Nascimento = nascimento;
-            Sexo = sexo;
-            Cidade = cidade;
-
-
-
-        }
-        public Aluno(int matricula, string nome, DateTime nascimento, Sexo sexo, Cidade cidade, string cpf)
-        {
-            Matricula = matricula;
-            Nome = nome;
-            Nascimento = nascimento;
-            Sexo = sexo;
-            Cidade = cidade;
-        
-
-        }
 
         public override bool Equals(object obj)
         {
