@@ -98,29 +98,30 @@ namespace EM.Web.Controllers
             }
 
          [HttpPost]
-           public IActionResult RelatorioAluno(int? sexo=null, int? ID_Cidade=null)
+           public IActionResult RelatorioAluno(int? sexo=null, int? ID_Cidade=null,bool linhaAlternada=false )
             
            {
 			try
 			{
-				var alunos = repositorioAluno.GetAll().ToList();
+				List <Aluno> alunos = repositorioAluno.GetAll().ToList();
 
 				// Filtrar por sexo, se fornecido
 				if (sexo.HasValue)
 				{
 					alunos = alunos.Where(a => (int)a.Sexo.Value == sexo.Value).ToList();
 				}
-
+                string nameCidade = null;
 				// Filtrar por cidade, se fornecido
 				if (ID_Cidade.HasValue)
 				{
 					alunos = alunos.Where(a => a.Cidade.ID_Cidade == ID_Cidade).ToList();
+                    nameCidade=repositorioCidade.GetAll().FirstOrDefault(c => c.ID_Cidade==ID_Cidade)?.NomeCidade;
 				}
 
                 // Ger// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-                byte[] pdfPath = Relatorio.GerarPDF(alunos,ID_Cidade,sexo);
-                // Retorna o FileStream como um FileStreamResult.
-                return File(pdfPath, "application/pdf", "RelatorioAlunos.pdf");
+                byte[] pdfContent = Relatorio.GerarPDF(alunos,nameCidade,sexo,linhaAlternada);
+               
+                return File(pdfContent, "application/pdf",null,false);
 			}
 			catch (Exception ex)
 			{
@@ -136,12 +137,12 @@ namespace EM.Web.Controllers
 			List<Aluno> alunos = repositorioAluno.GetAll().ToList();
 
 			// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
-			byte [] pdfPath = Relatorio.GerarPDF(alunos,null,null);
+			byte [] pdfContent = Relatorio.GerarPDF(alunos,null,null,false);
 
 
 
             // Retorne o FileStream como um FileStreamResult.
-            return File(pdfPath, "application/pdf", "RelatorioAlunos.pdf");
+            return File(pdfContent, "application/pdf");
         }
 
 		public IActionResult RelatorioDeAluno()

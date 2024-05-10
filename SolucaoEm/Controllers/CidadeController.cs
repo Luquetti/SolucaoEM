@@ -17,7 +17,7 @@ namespace EM.Web.Controllers
 		
         public IActionResult CadastreCidade(int? id )
         {
-			{
+			
 				if (id != null)
 				{
 					Cidade? cidade = _repositorioCidade.Get(c => c.ID_Cidade == id).FirstOrDefault();
@@ -30,7 +30,7 @@ namespace EM.Web.Controllers
 				}
 				ViewBag.IsEdicao = false;
 				return View(new Cidade());
-			}
+			
 		}
 		[HttpPost]
 		public IActionResult CadastreCidade(Cidade cidade)//esse é o metodo 

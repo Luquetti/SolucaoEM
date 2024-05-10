@@ -9,10 +9,11 @@ namespace EM.Domain.Utilidades
 
     public class Relatorio
     { 
-        public static byte[] GerarPDF(List<Aluno> alunos, int? Id_Cidade, int? Sexo)
+        public static byte[] GerarPDF(List<Aluno> alunos, string? nameCidade , int? Sexo,bool linhaAlternada)
         {
 
             using MemoryStream m = new();
+
 
             Document document = new(PageSize.A4, 25, 25, 25, 30);
             PdfWriter writer = PdfWriter.GetInstance(document, m);
@@ -25,6 +26,9 @@ namespace EM.Domain.Utilidades
             string backgroundPath = "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\fundo2.png";
 
             document.Open();
+            //TENATDNO COLOCAR LINHA ZEBRADA:
+            BaseColor colorEven = new BaseColor(233, 233, 233); // Cor clara para linhas pares
+            BaseColor colorOdd = new BaseColor(255, 255, 255);
 
             // Title table, set this up with reduced or negative padding
             PdfPTable layoutTable = new(1)
@@ -52,18 +56,19 @@ namespace EM.Domain.Utilidades
             document.Add(layoutTable);
 
 
-            document.Add(new Paragraph());
+
+			document.Add(new Paragraph());
             Chunk linebreak = new(new iTextSharp.text.pdf.draw.LineSeparator(1f, 112f, BaseColor.BLACK, Element.ALIGN_CENTER, -1));
+            document.Add(linebreak);
 
-
-            if (Id_Cidade.HasValue || Sexo.HasValue)
+			if (!string.IsNullOrEmpty(nameCidade) || Sexo.HasValue)
             {
                 Font filterFont = FontFactory.GetFont("Arial", 12, Font.NORMAL);
                 document.Add(new Paragraph($"Filtros utilizados:"));
                 _ = new Paragraph($"Filtros utilizados:");
-                if (Id_Cidade.HasValue)
+                if (!string.IsNullOrEmpty(nameCidade))
                 {
-                    Paragraph filterCidade = new($"• Cidade: ID-{Id_Cidade}")
+                    Paragraph filterCidade = new($"• Cidade: {nameCidade}")
                     {
                         Alignment = Element.ALIGN_LEFT
                     };
@@ -77,9 +82,11 @@ namespace EM.Domain.Utilidades
                     };
                     document.Add(filterSexo);
                 }
-            }
 
-            document.Add(linebreak);
+				document.Add(new Paragraph("\n"));
+			}
+
+            
 
             PdfPTable table = new([5, 10, 4, 7, 6, 8, 2])
             {
@@ -105,7 +112,7 @@ namespace EM.Domain.Utilidades
             table.AddCell(CreateHeaderCell("Idade"));
             table.AddCell(CreateHeaderCell("Cidade"));
             table.AddCell(CreateHeaderCell("UF"));
-
+            table.HeaderRows = 1;
 
 
 
@@ -114,33 +121,44 @@ namespace EM.Domain.Utilidades
 
 
            
-            table.HeaderRows = 1;
-
+            //pROXIMA LINHA CONTEM MUDANÇA PARA ZEBRAR 
+            int rowIndex = 0;
             foreach (Aluno aluno in alunos)
-            {
+			{
+				if (linhaAlternada)
+				{
+					// Aplica cores alternadas se linhaAlternada for true
+					BaseColor rowColor = (rowIndex % 2 == 0) ? colorEven : colorOdd;
+					table.AddCell(new PdfPCell(new Phrase(aluno.Matricula.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+					table.AddCell(new PdfPCell(new Phrase(aluno.Nome, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+					table.AddCell(new PdfPCell(new Phrase(aluno.Sexo.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+					table.AddCell(new PdfPCell(new Phrase(aluno.CPF, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+					table.AddCell(new PdfPCell(new Phrase(aluno.Nascimento.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.NomeCidade, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.UF, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+				} else
 
-                table.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                table.AddCell(aluno.Matricula?.ToString() ?? "");
+				{
+					// Não aplica cores, relatório normal
+					table.AddCell(new PdfPCell(new Phrase(aluno.Matricula.ToString(), FontFactory.GetFont("Arial", 12))));
+					table.AddCell(new PdfPCell(new Phrase(aluno.Nome, FontFactory.GetFont("Arial", 12))));
+					table.AddCell(new PdfPCell(new Phrase(aluno.Sexo.ToString(), FontFactory.GetFont("Arial", 12))));
+					table.AddCell(new PdfPCell(new Phrase(aluno.CPF, FontFactory.GetFont("Arial", 12))));
+					table.AddCell(new PdfPCell(new Phrase(aluno.Nascimento.ToString(), FontFactory.GetFont("Arial", 12))));
+					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.NomeCidade, FontFactory.GetFont("Arial", 12))));
+					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.UF, FontFactory.GetFont("Arial", 12))));
+				}
+				rowIndex++; // Incrementa o índice da linha para alternar cores
+			}
 
+            table.SpacingAfter = 100;
+			document.Add(table);
+			document.Close();
 
+			return m.ToArray();
+		}
 
-                table.AddCell(aluno.Nome ?? "");
-                string sexoAbreviado = (aluno.Sexo == Enum.Sexo.masculino ? "M" : "F");
-                table.AddCell(sexoAbreviado.ToString());
-                table.AddCell(aluno.CPF);
-                table.AddCell(CalcularIdade(aluno.Nascimento).ToString());
-                table.AddCell(aluno.Cidade.NomeCidade);
-                table.AddCell(aluno.Cidade.UF);
-
-            }
-
-            document.Add(table);
-            document.Close();
-
-            return m.ToArray();
-        }
-
-        private static string CalcularIdade(DateTime? dataNascimento)
+		private static string CalcularIdade(DateTime? dataNascimento)
         {
             if (!dataNascimento.HasValue)
             {
