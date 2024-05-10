@@ -3,7 +3,7 @@ namespace EM.REPOSITORY.ConexaoBancoDeDados
 {
     public class BancoDeDados
 	{
-		private static readonly string _caminho = @"Server=localhost; Port=3054;Database=C:\\Work.Luquetti\\Bd\\CADASTRARALUNO.fdb;User=SYSDBA;Password=masterkey;";
+		private static readonly string _caminho = @"Server=localhost; Port=3050;Database=C:\\CADASTRARALUNO.fdb;User=SYSDBA;Password=masterkey;";
         
 		
 		private static FbConnection? conn = null;

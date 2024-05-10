@@ -5,8 +5,8 @@ namespace EM.Domain.Utilidades.Validacoes
 {
     public class PdfEvents : PdfPageEventHelper
     {
-        private string backgroundImagePath= "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\fundo2.png";
-		private  string logopath = "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\wwwroot\\Imagens\\unnamed.png";
+        private string backgroundImagePath= ".\\wwwroot\\Imagens\\fundo2.png";
+		private  string logopath = ".\\wwwroot\\Imagens\\unnamed.png";
 
         // Construtor para inicializar os caminhos das imagens
 
