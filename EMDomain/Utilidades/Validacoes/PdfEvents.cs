@@ -5,8 +5,8 @@ namespace EM.Domain.Utilidades.Validacoes
 {
     public class PdfEvents : PdfPageEventHelper
     {
-        private string backgroundImagePath= ".\\wwwroot\\Imagens\\fundo2.png";
-		private  string logopath = ".\\wwwroot\\Imagens\\unnamed.png";
+		private readonly string backgroundImagePath = ".\\wwwroot\\Imagens\\fundo2.png";
+		private readonly string logopath = ".\\wwwroot\\Imagens\\unnamed.png";
 
         // Construtor para inicializar os caminhos das imagens
 
@@ -36,7 +36,7 @@ namespace EM.Domain.Utilidades.Validacoes
             header.AddCell(logoCell);
 
             // Optionally, reduce the height of this cell to force content upwards
-            PdfPCell emptyCell = new PdfPCell()
+            PdfPCell emptyCell = new()
             {
                 FixedHeight = 5,  // Minimal height to reduce space
                 Border = Rectangle.NO_BORDER
@@ -45,7 +45,7 @@ namespace EM.Domain.Utilidades.Validacoes
 
 			PdfGState gs = new()
 			{
-				FillOpacity = 0.6f
+				FillOpacity = 0.3f
 			};
 			writer.DirectContentUnder.SetGState(gs);
 			Image backgroundImage = Image.GetInstance(backgroundImagePath);

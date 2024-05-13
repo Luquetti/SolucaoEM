@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Work.Luquetti\\SolucaoEM\\SolucaoEm\\EM.Web.csproj": {}
+    "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\EM.Web.csproj": {}
   },
   "projects": {
-    "C:\\Work.Luquetti\\SolucaoEM\\EM.Repository\\EM.Repository.csproj": {
+    "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\EM.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Work.Luquetti\\SolucaoEM\\EM.Repository\\EM.Repository.csproj",
+        "projectUniqueName": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\EM.Repository.csproj",
         "projectName": "EM.Repository",
-        "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\EM.Repository\\EM.Repository.csproj",
-        "packagesPath": "C:\\Users\\Luquetti\\.nuget\\packages\\",
-        "outputPath": "C:\\Work.Luquetti\\SolucaoEM\\EM.Repository\\obj\\",
+        "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\EM.Repository.csproj",
+        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+        "outputPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Luquetti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj": {
-                "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj"
+              "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj": {
+                "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj"
               }
             }
           }
@@ -78,21 +78,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj": {
+    "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj",
+        "projectUniqueName": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj",
         "projectName": "EM.Domain",
-        "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj",
-        "packagesPath": "C:\\Users\\Luquetti\\.nuget\\packages\\",
-        "outputPath": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\obj\\",
+        "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj",
+        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+        "outputPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Luquetti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -152,21 +152,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Work.Luquetti\\SolucaoEM\\SolucaoEm\\EM.Web.csproj": {
+    "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\EM.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Work.Luquetti\\SolucaoEM\\SolucaoEm\\EM.Web.csproj",
+        "projectUniqueName": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\EM.Web.csproj",
         "projectName": "EM.Web",
-        "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\SolucaoEm\\EM.Web.csproj",
-        "packagesPath": "C:\\Users\\Luquetti\\.nuget\\packages\\",
-        "outputPath": "C:\\Work.Luquetti\\SolucaoEM\\SolucaoEm\\obj\\",
+        "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\EM.Web.csproj",
+        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+        "outputPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\SolucaoEm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Luquetti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -180,11 +180,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Work.Luquetti\\SolucaoEM\\EM.Repository\\EM.Repository.csproj": {
-                "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\EM.Repository\\EM.Repository.csproj"
+              "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\EM.Repository.csproj": {
+                "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EM.Repository\\EM.Repository.csproj"
               },
-              "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj": {
-                "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj"
+              "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj": {
+                "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj"
               }
             }
           }
@@ -236,7 +236,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

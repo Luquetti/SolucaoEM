@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using EM.Domain;
+using EM.Domain.Enum;
 using EM.Domain.Interface;
 using EM.Domain.Utilidades;
 using Microsoft.AspNetCore.Mvc;
@@ -98,7 +99,7 @@ namespace EM.Web.Controllers
             }
 
          [HttpPost]
-           public IActionResult RelatorioAluno(int? sexo=null, int? ID_Cidade=null,bool linhaAlternada=false,bool paisagem=false)
+           public IActionResult RelatorioAluno(Aluno a, int? sexo=null, int? ID_Cidade=null,bool linhaAlternada=false,bool paisagem=false)
             
            {
 			try
@@ -106,16 +107,12 @@ namespace EM.Web.Controllers
 				List <Aluno> alunos = repositorioAluno.GetAll().ToList();
 
 				// Filtrar por sexo, se fornecido
-				if (sexo.HasValue)
-				{
-					alunos = alunos.Where(a => (int)a.Sexo.Value == sexo.Value).ToList();
-				}
-                string nameCidade = null;
+				
+                string? nameCidade = null;
 				// Filtrar por cidade, se fornecido
 				if (ID_Cidade.HasValue)
-				{
-					alunos = alunos.Where(a => a.Cidade.ID_Cidade == ID_Cidade).ToList();
-                    nameCidade=repositorioCidade.GetAll().FirstOrDefault(c => c.ID_Cidade==ID_Cidade)?.NomeCidade;
+				{alunos = alunos.Where(a => a.Cidade != null && a.Cidade.ID_Cidade == ID_Cidade.Value).ToList();
+            nameCidade = repositorioCidade.GetAll().FirstOrDefault(c => c.ID_Cidade == ID_Cidade)?.NomeCidade;
 				}
 
                 // Ger// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.

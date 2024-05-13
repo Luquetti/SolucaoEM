@@ -10,11 +10,28 @@ using EM.Domain.Interface;
 namespace EM.Repository
 {
 	public class RepositorioCidade : IRepositorioCidade<Cidade>
-    {
+    {       
 		
 		public   void Add(Cidade cidade)
-        {
-            using DbConnection cn = BancoDeDados.GetConexao();
+		{
+			if (cidade == null)
+			{
+				throw new ArgumentNullException(nameof(cidade), "O objeto cidade fornecido é nulo.");
+			}
+
+			if (cidade.NomeCidade == null)
+			{
+				throw new  ArgumentNullException(nameof(cidade.NomeCidade), "O nome da cidade não pode ser nulo.");
+			}
+
+			if (cidade.UF == null)
+			{
+				ArgumentNullException argumentNullException1 = new(nameof(cidade.UF), "A UF não pode ser nula.");
+				ArgumentNullException argumentNullException = argumentNullException1;
+				throw argumentNullException;
+			}
+
+			using DbConnection cn = BancoDeDados.GetConexao();
 			using DbCommand cmd = cn.CreateCommand();
             cmd.CommandText = "INSERT INTO CIDADES(NOME,UF) VALUES(@NomeCidade,@UF)";// o primeiro se refere a como esta na tabela , o segundo é como eu desejo repassar esses valores
 
@@ -36,15 +53,17 @@ namespace EM.Repository
             using DbConnection cn = BancoDeDados.GetConexao();
             using DbCommand cmd = cn.CreateCommand();
             cmd.CommandText = @"SELECT * FROM CIDADES ORDER BY CIDADES.UF, CIDADES.NOME";
-            List<Cidade> cidades = new List<Cidade>();
+            List<Cidade> cidades = [];
             DbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Cidade cidade = new Cidade();
-                cidade.ID_Cidade = Convert.ToInt32(reader["ID"]);
-                cidade.NomeCidade = reader["nome"].ToString();
-                cidade.UF = reader["UF"].ToString();
-                cidades.Add(cidade);
+				Cidade cidade = new()
+				{
+					ID_Cidade = Convert.ToInt32(reader["ID"]),
+                    NomeCidade = (string)reader["nome"],
+                    UF = (string)reader["UF"],
+            };
+				cidades.Add(cidade);
             }
             reader.Close();
 
@@ -58,8 +77,10 @@ namespace EM.Repository
         }
 
         public void Update(Cidade cidade)
-        {
-            using DbConnection cn = BancoDeDados.GetConexao();
+		{
+
+
+			using DbConnection cn = BancoDeDados.GetConexao();
             using DbCommand cmd = cn.CreateCommand();
             cmd.CommandText = @"UPDATE CIDADES SET NOME=@Nome,UF=@UF WHERE ID=@ID_Cidade";
             cmd.Parameters.CreateParameter("@Nome", cidade.NomeCidade);

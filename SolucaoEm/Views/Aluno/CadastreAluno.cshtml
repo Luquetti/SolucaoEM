@@ -36,7 +36,7 @@
             <label for="Nascimento" class="form-label">Nascimento</label>
             <input type="date" class="form-control" id="Nascimento" name="Nascimento" required
                    placeholder="DD/MM/YYYY"
-                   value="@(Model.Nascimento.HasValue ? Model.Nascimento.Value.ToString("yyyy-MM-dd") : "")"
+                   value="@(isEdicao ? Model.Nascimento.ToString("yyyy-MM-dd") : "")"
                    max="@DateTime.Now.ToString("yyyy-MM-dd")"> <!-- Aqui adicionamos o atributo max -->
             <span class="text-danger" data-valmsg-for="Nascimento" data-valmsg-replace="true"></span>
         </div>
@@ -64,29 +64,33 @@
 
 
 
-        <div class="form-group">
+        <div class="">
             <label for="inputSexo" class="form-label">Sexo</label>
-            <select id="inputSexo" name="Sexo" class="form-select" aria-label="Seleção de Sexo" required>
-                <option value="" disabled selected>Selecione</option>
-                @{
-                    int? sexoValue = (int?)Model.Sexo;
-                    if (sexoValue == 1)
-                    {
-                        <option value="1" selected>Feminino</option>
-                        <option value="0">Masculino</option>
+            @if (!isEdicao)
+            {
+                <select id="Sexo" name="Sexo" class="form-select" aria-label="Default select example">
+                    <option value="" selected>Selecione</option>
+                    @{
+
+                        <option value="1">Masculino</option>
+                        <option value="0">Feminino</option>
+
                     }
-                    else if (sexoValue == 0)
+                </select>
+            }
+
+            else
+            {
+                <select asp-for="Sexo" id="imputSexo" class="form-select" name="Sexo" required>
+                    <option selected disabled value="">Selecione</option>
+                    @foreach (var sexo in Enum.GetValues(typeof(Sexo)))
                     {
-                        <option value="0" selected>Masculino</option>
-                        <option value="1">Feminino</option>
+                        <option value="@sexo">@sexo</option>
                     }
-                    else
-                    {
-                        <option value="0">Masculino</option>
-                        <option value="1">Feminino</option>
-                    }
-                }
-            </select>
+                </select>
+            }
+
+
             @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
         </div>
 

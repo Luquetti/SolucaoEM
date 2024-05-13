@@ -25,12 +25,19 @@ namespace EM.Repository
 
 			cmd.Parameters.CreateParameter("@NomeCidade", aluno.Nome);
 
-			cmd.Parameters.CreateParameter("@CPF", aluno.CPF);
+            cmd.Parameters.CreateParameter("@CPF", aluno.CPF ?? (object)DBNull.Value);
+			
 			cmd.Parameters.CreateParameter("@DataNascimento", aluno.Nascimento);
 			cmd.Parameters.CreateParameter("@Sexo", aluno.Sexo);
-			cmd.Parameters.CreateParameter("@Cidades", aluno.Cidade.ID_Cidade);
+            if (aluno.Cidade == null || aluno.Cidade.ID_Cidade == 0)
+            {
+                throw new ArgumentNullException(nameof(aluno.Cidade), "Cidade não pode ser nulo e ID_Cidade não pode ser zero.");
+            }
 
-			cmd.ExecuteNonQuery();
+            cmd.Parameters.CreateParameter("@Cidades", aluno.Cidade.ID_Cidade);
+
+
+            cmd.ExecuteNonQuery();
 
 
 
@@ -55,7 +62,7 @@ namespace EM.Repository
                 Aluno aluno = new()
                 {
                     Matricula = Convert.ToInt32(rdr["matricula"]),
-                    Nome = rdr["nome"].ToString(),
+                    Nome =  (string)rdr["nome"],
 
                     CPF = rdr["CPF"].ToString(),
                     Nascimento = Convert.ToDateTime(rdr["dataNascimento"]),
@@ -63,9 +70,9 @@ namespace EM.Repository
                     // Preencher as informações da cidade associada ao aluno
                     Cidade = new Cidade()
                 };
-                aluno.Cidade.NomeCidade = rdr["NomeCidade"].ToString();
-				aluno.Cidade.UF = rdr["UFCidade"].ToString();
-				alunos.Add(aluno);
+                aluno.Cidade.NomeCidade = (string)rdr["NomeCidade"];
+                aluno.Cidade.UF = (string)rdr["UFCidade"];
+                alunos.Add(aluno);
 			}
 			rdr.Close();
 
@@ -98,7 +105,7 @@ namespace EM.Repository
                 Aluno aluno = new()
                 {
                     Matricula = Convert.ToInt32(rdr["matricula"]),
-                    Nome = rdr["nome"].ToString(),
+                    Nome = (string)rdr["nome"],
 
                     CPF = rdr["CPF"].ToString(),
                     Nascimento = Convert.ToDateTime(rdr["dataNascimento"]),
@@ -106,9 +113,9 @@ namespace EM.Repository
                     // Preencher as informações da cidade associada ao aluno
                     Cidade = new Cidade()
                 };
-                aluno.Cidade.NomeCidade = rdr["NomeCidade"].ToString();
-				aluno.Cidade.UF = rdr["UFCidade"].ToString();
-				alunos.Add(aluno);
+                aluno.Cidade.NomeCidade = (string)rdr["NomeCidade"];
+                aluno.Cidade.UF = (string)rdr["UFCidade"];
+                alunos.Add(aluno);
 			}
 			rdr.Close();
 
@@ -132,7 +139,7 @@ namespace EM.Repository
 			cmd.CommandText = @"SELECT  A.matricula, A.nome, A.sexo, A.dataNascimento, A.CPF, C.nome AS nomeCidade, C.UF as UFCidade, C.ID FROM Aluno A
 							INNER JOIN
 					Cidades C ON A.cidadeS = C.ID order by A.matricula asc";
-			List<Aluno> alunos = new List<Aluno>();
+			List<Aluno> alunos = [];
 			DbDataReader rdr = cmd.ExecuteReader();
 
 			while (rdr.Read())
@@ -141,7 +148,7 @@ namespace EM.Repository
                 Aluno aluno = new()
                 {
                     Matricula = Convert.ToInt32(rdr["matricula"]),
-                    Nome = rdr["nome"].ToString(),
+                    Nome = (string)rdr["nome"],
 
                     CPF = rdr["CPF"].ToString(),
                     Nascimento = Convert.ToDateTime(rdr["dataNascimento"]),
@@ -149,9 +156,9 @@ namespace EM.Repository
                     // Preencher as informações da cidade associada ao aluno
                     Cidade = new Cidade()
                 };
-                aluno.Cidade.NomeCidade = rdr["NomeCidade"].ToString();
-				aluno.Cidade.UF = rdr["UFCidade"].ToString();
-				aluno.Cidade.ID_Cidade = Convert.ToInt32(rdr["ID"]);
+                aluno.Cidade.NomeCidade = (string)rdr["NomeCidade"];
+                aluno.Cidade.UF = (string)rdr["UFCidade"];
+                aluno.Cidade.ID_Cidade = Convert.ToInt32(rdr["ID"]);
 
 				alunos.Add(aluno);
 			}
@@ -167,6 +174,7 @@ namespace EM.Repository
 
 		public void Remove(Aluno aluno)
 		{
+			
 			using DbConnection cn = BancoDeDados.GetConexao();
 			using DbCommand cmd = cn.CreateCommand();
 			cmd.CommandText = "DELETE FROM ALUNO WHERE MATRICULA= @MATRICULA";
@@ -184,14 +192,16 @@ namespace EM.Repository
 
 		public void Update(Aluno aluno)
 		{
+			
 			using DbConnection cn = BancoDeDados.GetConexao();
 			using DbCommand cmd = cn.CreateCommand();
 			cmd.CommandText = @"UPDATE Aluno SET Nome = @Nome, CPF = @CPF, DataNascimento = @DataNascimento, Sexo = @Sexo, Cidades = @Cidades  WHERE Matricula = @Matricula";
 			cmd.Parameters.CreateParameter("@Matricula", aluno.Matricula);
 			cmd.Parameters.CreateParameter("@Nome", aluno.Nome);
 			cmd.Parameters.CreateParameter("@Cidades", aluno.Cidade.ID_Cidade);
-			cmd.Parameters.CreateParameter("@CPF", aluno.CPF);
+			cmd.Parameters.CreateParameter("@CPF", aluno.CPF?? throw new ArgumentException(nameof(aluno.CPF)));
 			cmd.Parameters.CreateParameter("@DataNascimento", aluno.Nascimento);
+			
 			cmd.Parameters.CreateParameter("@Sexo", aluno.Sexo);
 			cmd.ExecuteNonQuery();
 		}
@@ -200,8 +210,7 @@ namespace EM.Repository
 			return GetAll().Where(predicate.Compile());
 		}
 
-		//checando cpf
-
+		
 	}
 
 }

@@ -23,5 +23,9 @@ namespace SolucaoEm.Controllers
 
         }
 
-    }
+		public override int GetHashCode()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

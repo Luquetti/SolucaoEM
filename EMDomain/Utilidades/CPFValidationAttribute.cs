@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 namespace EM.Domain.Utilidades;
 public class CPFValidationAttribute : ValidationAttribute
 {
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         if (value == null)
         {
             return ValidationResult.Success;
         }
-        string cpf = value.ToString();
-        // Use o método CPFValidado para validar o CPF
+        string cpf = value.ToString() ?? "";
         if (!ValidaCPF.CPFValida(cpf))
         {
             return new ValidationResult("CPF inválido.");

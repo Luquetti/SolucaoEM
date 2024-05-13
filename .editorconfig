@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA2208: Instanciar exceções de argumentos corretamente
+dotnet_diagnostic.CA2208.severity = none

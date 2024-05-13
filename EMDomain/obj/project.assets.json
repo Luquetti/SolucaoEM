@@ -551,19 +551,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Luquetti\\.nuget\\packages\\": {}
+    "C:\\Users\\Escolar Manager\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj",
+      "projectUniqueName": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj",
       "projectName": "EM.Domain",
-      "projectPath": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\EM.Domain.csproj",
-      "packagesPath": "C:\\Users\\Luquetti\\.nuget\\packages\\",
-      "outputPath": "C:\\Work.Luquetti\\SolucaoEM\\EMDomain\\obj\\",
+      "projectPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\EM.Domain.csproj",
+      "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+      "outputPath": "C:\\Work.Luquetti\\POO\\SolucaoEm\\EMDomain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Luquetti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -623,7 +623,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

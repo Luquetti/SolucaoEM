@@ -33,8 +33,8 @@ namespace EM.Domain.Utilidades
 
             document.Open();
             //TENATDNO COLOCAR LINHA ZEBRADA:
-            BaseColor colorEven = new BaseColor(0, 0, 0, 40); // Cor clara para linhas pares
-            BaseColor colorOdd = null;
+            BaseColor colorEven = new(0, 0, 0, 40); // Cor clara para linhas pares
+            BaseColor? colorOdd = null;
 
             // Title table, set this up with reduced or negative padding
             PdfPTable layoutTable = new(1)
@@ -48,7 +48,7 @@ namespace EM.Domain.Utilidades
                 Alignment = Element.ALIGN_CENTER
             };
 
-            PdfPCell titleCell = new PdfPCell(new Phrase(title))
+            PdfPCell titleCell = new(new Phrase(title))
             {
                 Border = Rectangle.NO_BORDER,
                 HorizontalAlignment = Element.ALIGN_CENTER,
@@ -104,8 +104,7 @@ namespace EM.Domain.Utilidades
             table.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
             table.DefaultCell.VerticalAlignment = Element.ALIGN_MIDDLE;
 
-
-            PdfPCell CreateHeaderCell(string text) => new(new Phrase(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE)))
+			static PdfPCell CreateHeaderCell(string text) => new(new Phrase(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE)))
             {
                 BackgroundColor = new BaseColor(0, 100, 0)
             };
@@ -131,30 +130,35 @@ namespace EM.Domain.Utilidades
             int rowIndex = 0;
             foreach (Aluno aluno in alunos)
 			{
-				if (linhaAlternada)
-				{
-					// Aplica cores alternadas se linhaAlternada for true
-					BaseColor rowColor = (rowIndex % 2 == 0) ? colorEven : colorOdd;
-					table.AddCell(new PdfPCell(new Phrase(aluno.Matricula.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-					table.AddCell(new PdfPCell(new Phrase(aluno.Nome, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-					table.AddCell(new PdfPCell(new Phrase(aluno.Sexo.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-					table.AddCell(new PdfPCell(new Phrase(aluno.CPF, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-					table.AddCell(new PdfPCell(new Phrase(aluno.Nascimento.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.NomeCidade, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.UF, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
-				} else
+                if (linhaAlternada)
+                {
+                    // Aplica cores alternadas se linhaAlternada for true
+                    BaseColor? rowColor = rowIndex % 2 == 0 ? colorEven : colorOdd;
+                    string? nomeCidade = aluno.Cidade != null ? aluno.Cidade.NomeCidade : "Cidade não especificada";
+                    string? uf = aluno.Cidade != null ? aluno.Cidade.UF : "UF não especificada";
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Matricula.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Nome, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Sexo.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+                    table.AddCell(new PdfPCell(new Phrase(aluno.CPF, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Nascimento.ToString(), FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+                    table.AddCell(new PdfPCell(new Phrase(nomeCidade, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor });
+                    table.AddCell(new PdfPCell(new Phrase(uf, FontFactory.GetFont("Arial", 12))) { BackgroundColor = rowColor }); ;
+                }
+                else
 
-				{
-					// Não aplica cores, relatório normal
-					table.AddCell(new PdfPCell(new Phrase(aluno.Matricula.ToString(), FontFactory.GetFont("Arial", 12))));
-					table.AddCell(new PdfPCell(new Phrase(aluno.Nome, FontFactory.GetFont("Arial", 12))));
-					table.AddCell(new PdfPCell(new Phrase(aluno.Sexo.ToString(), FontFactory.GetFont("Arial", 12))));
-					table.AddCell(new PdfPCell(new Phrase(aluno.CPF, FontFactory.GetFont("Arial", 12))));
-					table.AddCell(new PdfPCell(new Phrase(aluno.Nascimento.ToString(), FontFactory.GetFont("Arial", 12))));
-					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.NomeCidade, FontFactory.GetFont("Arial", 12))));
-					table.AddCell(new PdfPCell(new Phrase(aluno.Cidade.UF, FontFactory.GetFont("Arial", 12))));
-				}
-				rowIndex++; // Incrementa o índice da linha para alternar cores
+                {
+                    string? nomeCidade = aluno.Cidade != null ? aluno.Cidade.NomeCidade : "Cidade não especificada";
+                    string? uf = aluno.Cidade != null ? aluno.Cidade.UF : "UF não especificada";
+
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Matricula.ToString(), FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Nome, FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(aluno.Sexo.ToString(), FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(aluno.CPF, FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(CalcularIdade(aluno.Nascimento), FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(nomeCidade, FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(uf, FontFactory.GetFont("Arial", 12))));
+                }
+                rowIndex++; // Incrementa o índice da linha para alternar cores
 			}
 
             table.SpacingAfter = 100;
