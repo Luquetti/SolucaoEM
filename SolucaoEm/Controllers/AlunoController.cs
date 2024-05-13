@@ -114,6 +114,9 @@ namespace EM.Web.Controllers
 				{alunos = alunos.Where(a => a.Cidade != null && a.Cidade.ID_Cidade == ID_Cidade.Value).ToList();
             nameCidade = repositorioCidade.GetAll().FirstOrDefault(c => c.ID_Cidade == ID_Cidade)?.NomeCidade;
 				}
+                if (sexo.HasValue)
+				{alunos = alunos.Where(a =>  a.Sexo ==(Sexo) sexo).ToList();
+				}
 
                 // Ger// Gere o relatório e obtenha o caminho do arquivo PDF com os filtros de Id_cidade e Sexo.
                 byte[] pdfContent = Relatorio.GerarPDF(alunos,nameCidade,sexo,linhaAlternada,paisagem);
